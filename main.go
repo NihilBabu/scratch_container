@@ -38,9 +38,12 @@ func child() {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
-	must(syscall.Chroot("/home/rootfs"))               //file system for container clone of a linux file system
-	must(os.Chdir("/"))                                // file system points to root of file system allocated in top line
-	must(syscall.Mount("proc", "proc", "proc", 0, "")) //mount proc for process
+	//file system for container clone of a linux file system
+	must(syscall.Chroot("/home/rootfs"))
+	// file system points to root of file system allocated in top line
+	must(os.Chdir("/"))
+	//mount proc for process
+	must(syscall.Mount("proc", "proc", "proc", 0, ""))
 	must(cmd.Run())
 }
 
